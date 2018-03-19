@@ -11,7 +11,7 @@ import { BannerComponent } from './components/banner/banner.component';
 import { InputComponent } from './components/input/input.component';
 import { ListComponent } from './components/list/list.component';
 import { GetDataService } from './services/get-data.service';//服务要手动引入
-
+import { AddLocalStorageService } from './services/add-local-storage.service';//引入服务
 
 @NgModule({
   declarations: [
@@ -28,7 +28,10 @@ import { GetDataService } from './services/get-data.service';//服务要手动�
     BrowserModule,
     FormsModule
   ],
-  providers: [GetDataService],//声明服务
+  providers: [
+    GetDataService,
+    AddLocalStorageService    
+  ],//声明服务
   bootstrap: [AppComponent]
 })
 export class AppModule { }

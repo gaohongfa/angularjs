@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { AddLocalStorageService } from '../../services/add-local-storage.service';
 
 @Component({
   selector: 'app-list',
@@ -7,15 +8,22 @@ import { Component, OnInit,Input } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  constructor(public add:AddLocalStorageService) { }
 
-  ngOnInit() {
-  }
   
   @Input() tolist;
   @Input() doing;
   comlist=[]; 
   done=0;  
+
+  ngOnInit() {
+    this.add.addLocalStorage( this.doing);  
+  }
+
+  ngOnChanges() {
+    this.add.addLocalStorage( this.doing);  
+  }  
+   
    
   change(idx){    
     this.comlist.push(this.tolist[idx]);
@@ -23,11 +31,13 @@ export class ListComponent implements OnInit {
     //console.log(this.comlist);
     this.tolist.splice(idx,1);
     this.doing=this.tolist.length;
+    this.add.addLocalStorage( this.doing);    
   }
 
   delData(idx){
    this.tolist.splice(idx,1);
    this.doing=this.tolist.length;
+   this.add.addLocalStorage( this.doing);  
   }
   
   change2(i){
@@ -35,6 +45,7 @@ export class ListComponent implements OnInit {
      this.comlist.splice(i,1);
      this.done=this.comlist.length;
      this.doing=this.tolist.length;
+     this.add.addLocalStorage( this.doing);  
   }
 
   delData2(i){
